@@ -187,6 +187,25 @@ ink href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&displa
             color: var(--secondary-blue);
         }
 
+        #themeToggle {
+    margin-left: 24px;
+    background-color: var(--light-gray);
+    color: var(--secondary-blue);
+    border: 2px solid #000;  /* black border for visibility */
+    border-radius: 6px;
+    font-size: 22px;          /* larger icon */
+    padding: 4px 10px;        /* single line, compact */
+    cursor: pointer;
+    line-height: 1;           /* keep it single line */
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#themeToggle:hover {
+    background-color: var(--secondary-blue);
+    color: var(--white);
+}
+
+
         /* ---------- Hero Section ---------- */
         .hero {
             background-color: var(--light-gray);
@@ -301,6 +320,14 @@ ink href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&displa
                 font-size: 32px;
             }
         }
+
+        body.dark-mode {
+            --white: #0f172a;
+            --light-gray: #020617;
+            --text-dark: #e5e7eb;
+            --primary-blue: #93c5fd;
+            --secondary-blue: #60a5fa;
+        }
         /* ---------- Scroll To Top Button ---------- */
         #scrollTopBtn {
             position: fixed;
@@ -343,6 +370,7 @@ ink href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&displa
         <a href="#">Programs</a>
         <a href="#">Resources</a>
         <a href="#">Contribute</a>
+        <button id="themeToggle" title="Toggle theme">🌙</button>
     </nav>
 </header>
 
@@ -436,24 +464,24 @@ ink href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&displa
 <button id="scrollTopBtn" title="Go to top">↑</button>
 
 <script>
-    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    /* Theme Toggle */
+    const themeToggle = document.getElementById("themeToggle");
+    themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        themeToggle.textContent =
+            document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+    });
 
+    /* Scroll To Top */
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
     window.addEventListener("scroll", () => {
-        if (window.scrollY > 300) {
-            scrollTopBtn.style.display = "block";
-        } else {
-            scrollTopBtn.style.display = "none";
-        }
+        scrollTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
     });
 
     scrollTopBtn.addEventListener("click", () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
     });
 </script>
-
 
 </body>
 </html>
